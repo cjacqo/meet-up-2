@@ -46,7 +46,7 @@ describe('<CitySearch />', () => {
       return location.toUpperCase().indexOf(cityTextBox.value.toUpperCase()) > -1
     }) : []
 
-    const suggestionListItems = CitySearchComponent.queryByRole('listitem')
+    const suggestionListItems = CitySearchComponent.queryAllByRole('listitem')
     expect(suggestionListItems).toHaveLength(suggestions.length + 1)
     for (let i = 0; i < suggestions.length; i += 1) {
       expect(suggestionListItems[i].textContent).toBe(suggestions[i])
