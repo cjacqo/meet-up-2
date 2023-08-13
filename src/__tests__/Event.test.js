@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 /* eslint-disable testing-library/prefer-screen-queries */
 /* eslint-disable testing-library/prefer-presence-queries */
 /* eslint-disable testing-library/no-render-in-setup */
@@ -33,6 +34,7 @@ describe('<Event />', () => {
   })
 
   test('by default, event\'s details section should be hidden', () => {
-
+    const eventDetails = EventComponent.queryByText('About Event:')
+    expect(eventDetails).not.toBeInTheDocument()
   })
 })
