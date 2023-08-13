@@ -12,9 +12,7 @@ const Event = ({ event }) => {
       <div className="event-wrapper">
         <h2 className="event-summary">{event.summary}</h2>
         <p className="event-start">{new Date(event.start.dateTime).toString()}</p>
-        <p className="event-location">
-          {`@${event.summary} | ${event.location}`}
-        </p>
+        <p className="event-location">{event.location}</p>
         {!isCollapsed && (
           <>
             <div className="event-details">

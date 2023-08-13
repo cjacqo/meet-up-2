@@ -9,10 +9,11 @@ import { extractLocations, getEvents } from '../api'
 
 describe('<Event />', () => {
   let EventComponent
-  const allEvents = mockData
+  let allEvents
 
-  beforeEach(() => {
-    EventComponent = render(<Event event={mockData[0]} />)
+  beforeEach(async () => {
+    allEvents = await getEvents()
+    EventComponent = render(<Event event={allEvents[0]} />)
   })
 
   test('renders the event component', () => {
@@ -29,5 +30,9 @@ describe('<Event />', () => {
 
   test('renders event details button with the title (show details)', () => {
     expect(EventComponent.queryByText('show details')).toBeInTheDocument()
+  })
+
+  test('by default, event\'s details section should be hidden', () => {
+
   })
 })
