@@ -4,9 +4,8 @@
 /* eslint-disable testing-library/no-render-in-setup */
 import { render } from '@testing-library/react'
 import Event from '../components/Event'
-import mockData from '../mock-data'
-import { userEvent } from '@testing-library/user-event'
-import { extractLocations, getEvents } from '../api'
+import userEvent from '@testing-library/user-event'
+import { getEvents } from '../api'
 
 describe('<Event />', () => {
   let EventComponent
@@ -36,5 +35,13 @@ describe('<Event />', () => {
   test('by default, event\'s details section should be hidden', () => {
     const eventDetails = EventComponent.container.querySelector('.event-details')
     expect(eventDetails).not.toBeInTheDocument()
+  })
+
+  test('shows the details section when the user clicks on the \'show details\' button', async () => {
+    const user = userEvent.setup()
+    const showDetailsButton = EventComponent.queryByRole('button')
+    await user.click(showDetailsButton)
+    const eventDetails = EventComponent.container.querySelector('.event-details')
+    expect(eventDetails).toBeInTheDocument()
   })
 })
