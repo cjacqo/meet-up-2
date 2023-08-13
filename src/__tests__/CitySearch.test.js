@@ -6,6 +6,9 @@ import userEvent from '@testing-library/user-event'
 import CitySearch from '../components/CitySearch'
 import { extractLocations, getEvents } from '../api'
 
+
+// Note
+
 describe('<CitySearch />', () => {
   let CitySearchComponent
 
@@ -51,5 +54,20 @@ describe('<CitySearch />', () => {
     for (let i = 0; i < suggestions.length; i += 1) {
       expect(suggestionListItems[i].textContent).toBe(suggestions[i])
     }
+  })
+
+  test('renders the suggestion text in the textbox upon clicking on the suggestion', async () => {
+    const user = userEvent.setup()
+    const allEvents = await getEvents()
+    const allLocations = extractLocations(allEvents)
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />)
+
+    const cityTextBox = CitySearchComponent.queryByRole('textbox')
+    await user.type(cityTextBox, 'Berlin')
+
+    const BerlinGermanySuggestion = CitySearchComponent.queryAllByRole('listitem')[0]
+
+    await user.click(BerlinGermanySuggestion)
+    expect(cityTextBox).toHaveValue(BerlinGermanySuggestion.textContent)
   })
 })
