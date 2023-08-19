@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 
-const NumberOfEvents = () => {
-  const [totalNumberOfEvents, setTotalNumberOfEvents] = useState(32)
+const NumberOfEvents = ({ currentNOE, setCurrentNOE }) => {
+  // const [totalNumberOfEvents, setTotalNumberOfEvents] = useState(32)
 
   const handleChange = e => {
-    setTotalNumberOfEvents(e.target.value)
+    setCurrentNOE(e.target.value)
   }
 
   return (
-    <div id='numberOfEvents'>
+    <div id='number-of-events'>
       <input
         type='text'
-        value={totalNumberOfEvents}
+        value={currentNOE}
         onChange={handleChange} />
     </div>
   )

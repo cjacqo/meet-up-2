@@ -9,7 +9,7 @@ import userEvent from '@testing-library/user-event'
   let NumberOfEventsComponent
 
   beforeEach(() => {
-    NumberOfEventsComponent = render(<NumberOfEvents />)
+    NumberOfEventsComponent = render(<NumberOfEvents currentNOE={32} />)
   })
   
   test('has an element with role of "textbox"', () => {
@@ -22,6 +22,9 @@ import userEvent from '@testing-library/user-event'
   })
 
   test('test if the user can change the number of events', async () => {
+    NumberOfEventsComponent.rerender(<NumberOfEvents
+      setCurrentNOE={() => { }}
+    />)
     const user = userEvent.setup()
     const textbox = NumberOfEventsComponent.queryByRole('textbox')
     await user.type(textbox, '{backspace}{backspace}10')

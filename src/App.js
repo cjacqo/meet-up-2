@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import './App.css'
 import CitySearch from './components/CitySearch'
@@ -13,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData()
-  }, [currentCity])
+  }, [currentCity, currentNOE])
 
   const fetchData = async () => {
     const allEvents = await getEvents()
@@ -29,7 +30,9 @@ const App = () => {
       <CitySearch
         allLocations={allLocations}
         setCurrentCity={setCurrentCity} />
-      <NumberOfEvents />
+      <NumberOfEvents
+       currentNOE={currentNOE}
+       setCurrentNOE={setCurrentNOE} />
       <EventList events={events} />
     </div>
   )
