@@ -24,6 +24,7 @@ import userEvent from '@testing-library/user-event'
   test('test if the user can change the number of events', async () => {
     NumberOfEventsComponent.rerender(<NumberOfEvents
       setCurrentNOE={() => { }}
+      setErrorAlert={() => { }}
     />)
     const user = userEvent.setup()
     const textbox = NumberOfEventsComponent.queryByRole('textbox')

@@ -39,7 +39,7 @@ describe('<CitySearch />', () => {
     const user = userEvent.setup()
     const allEvents = await getEvents()
     const allLocations = extractLocations(allEvents)
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />)
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} setInfoAlert={() => { }} />)
 
     const cityTextBox = CitySearchComponent.queryByRole('textbox')
     await user.type(cityTextBox, 'Berlin')
@@ -62,6 +62,7 @@ describe('<CitySearch />', () => {
     CitySearchComponent.rerender(<CitySearch
       allLocations={allLocations}
       setCurrentCity={() => { }}
+      setInfoAlert={() => { }}
     />)
 
     const cityTextBox = CitySearchComponent.queryByRole('textbox')
