@@ -59,17 +59,17 @@ An application that lists events and event details within a users city. Uses the
 - I should be able to **view total number of events**
 - So that **I can know all events in a given city or all events available**
 
-  -- Scenario 1: When a user hasn’t filtered events by a city
+  -- Scenario 1: When a user hasn't set a number of events to display, show all events
 
   - **Given** user hasn't filtered events by a city
   - **When** the user is on the home page of events
   - **Then** a total number of events should be shown
 
-  -- Scenario 2: When a user has filtered events by a city
+  -- Scenario 2: When a user has set number of events to display
 
-  - **Given** user has filtered events by a city
-  - **When** the user is on the home page of events that are filtered
-  - **Then** a total number of events should be shown
+  - **Given** the user is on the home page of events
+  - **When** the user sets a number in the number of events text box
+  - **Then** the user should see a that number of events in the list
 
 **Feature 4:** Use the App When Offline
 
