@@ -4,7 +4,7 @@ import './App.css'
 import CitySearch from './components/CitySearch'
 import EventList from './components/EventList'
 import NumberOfEvents from './components/NumberOfEvents'
-import { InfoAlert, ErrorAlert } from './components/Alert'
+import { InfoAlert, ErrorAlert, WarningAlert } from './components/Alert'
 import { extractLocations, getEvents } from './api'
 
 const App = () => {
@@ -14,8 +14,14 @@ const App = () => {
   const [currentCity, setCurrentCity] = useState('See all cities')
   const [infoAlert, setInfoAlert] = useState('')
   const [errorAlert, setErrorAlert] = useState('')
+  const [warningAlert, setWarningAlert] = useState('')
 
   useEffect(() => {
+    if (navigator.onLine) {
+      setWarningAlert('')
+    } else {
+      setWarningAlert('You are currently offline and are only seeing events that you have previously seen. Events may not be up to date.')
+    }
     fetchData()
   }, [currentCity, currentNOE])
 
