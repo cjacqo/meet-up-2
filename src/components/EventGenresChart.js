@@ -3,7 +3,9 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell
+  Cell,
+  Legend,
+  Tooltip
 } from 'recharts'
 
 const EventGenresChart = ({ events }) => {
@@ -15,6 +17,13 @@ const EventGenresChart = ({ events }) => {
     'jQuery',
     'Angular'
   ]
+  const colors = [
+    '#FFBE0B',
+    '#FB5607',
+    '#FF006E',
+    '#8338EC',
+    '#3A86FF'
+  ]
 
   useEffect(() => {
     setData(getData())
@@ -22,11 +31,12 @@ const EventGenresChart = ({ events }) => {
   }, [`${events}`])
 
   const getData = () => {
-    const data = genres.map(g => {
+    const data = genres.map((g, i) => {
       const filteredEvents = events.filter(e => e.summary.includes(g))
       return {
         name: g,
-        value: filteredEvents.length
+        value: filteredEvents.length,
+        fill: colors[i]
       }
     })
     return data
@@ -41,7 +51,7 @@ const EventGenresChart = ({ events }) => {
       <text
         x={x}
         y={y}
-        fill='#8884D8'
+        fill={colors[index]}
         textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline='central'
       >
@@ -53,15 +63,30 @@ const EventGenresChart = ({ events }) => {
   
   return (
     <ResponsiveContainer width='99%' height={400}>
-      <PieChart>
+      <PieChart width={730} height={250}>
         <Pie
           data={data}
+          cx='50%'
+          cy='50%'
           dataKey='value'
-          fill='#8884D8'
           labelLine={false}
           label={renderCustomizedLabel}
           outerRadius={130}
         />
+        {
+          data.map((e, i) => (
+            <Cell
+              key={`cell-${i}`}
+              fill={e.fill} />
+          ))
+        }
+        <Legend
+          verticalAlign='bottom'
+          layout='horizontal'
+          formatter={(value, entry, index) => (
+            <span style={{ color: entry.color }}>{entry.payload.name}</span>
+          )} />
+        <Tooltip />
       </PieChart>
     </ResponsiveContainer>
   )
